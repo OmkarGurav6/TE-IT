@@ -1,0 +1,50 @@
+
+use company
+
+db.employee.insertOne({ eid:7369, ename:"Smith", designation:"Clerk", hiredate:new Date("1980-12-17"), salary:8000, department:"Accounts"})
+
+db.employee.insertOne( { eid:7499, ename:"Allen", designation:"Salesman", hiredate:new Date("1981-02-10"), salary:16000, department:"Sales"})
+
+db.employee.insertOne( { eid:7521, ename:"Ward", designation:"Salesman", hiredate:new Date("1982-02-22"), salary:10000, department:"Sales"})
+
+db.employee.insertOne( { eid:7566, ename:"Jones", designation:"Manager", hiredate:new Date("1981-04-02"), salary:29750, department:"Accounts"})
+
+db.employee.insertOne( { eid:7654, ename:"Martin", designation:"Salesman", hiredate:new Date("1983-05-28"), salary:12500, department:"Sales"})
+
+db.employee.insertOne( { eid:7698, ename:"Blake", designation:"Manager", hiredate:new Date("1981-05-08"), salary:28500, department:"Sales"})
+
+db.employee.insertOne( { eid:7782, ename:"Clark", designation:"Manager", hiredate:new Date("1981-06-09"), salary:24500, department:"Engg"})
+
+db.employee.insertOne( { eid:7788, ename:"Scott", designation:"Analyst", hiredate:new Date("1982-12-09"), salary:30000, department:"Accounts"})
+
+db.employee.insertOne( { eid:7839, ename:"King", designation:"President", hiredate:new Date("1981-11-17"), salary:50000, department:"Engg"})
+
+db.employee.insertOne( { eid:7844, ename:"Turner", designation:"Salesman", hiredate:new Date("1981-09-08"), salary:15000, department:"Sales"})
+
+db.employee.aggregate({$group:{_id:"ID", Total_Salary:{$sum:"$salary"}}})
+
+db.employee.aggregate({$group:{_id:"ID", Min_Salary:{$min:"$salary"}, Max_Salary:{$max:"$salary"}, Avg_Salary:{$avg:"$salary"}}})
+
+db.employee.find({department:"Sales", salary:10000})
+
+db.employee.aggregate([{$match:{salary:{$gt:15000}}},{$group:{_id:"ID",Total_Salary_above_150000:{$sum:"$salary"}}}])
+
+db.employee.find({}).sort({"salary":-1}).limit(1)
+
+db.employee.find({}).sort({"salary":-1}).limit(2).skip(3)
+
+db.employee.find({}).sort({"salary":1}).limit(1).skip(1)
+
+db.employee.find({}).sort({"salary":-1}).limit(3)
+
+db.employee.aggregate([{$group: {_id: "$department",total_employee_count: {$sum: 1 }}}])
+
+db.employee.aggregate([{$group: {_id: "$department",max_salary: {$max: "$salary" },min_salary: {$min: "$salary"},average_salary: {$avg: "$salary"}}}])
+
+db.employee.find().sort({"ename":1})
+
+db.employee.aggregate([{$count:"Number of Employees"}])
+
+
+
+

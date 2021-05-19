@@ -1,0 +1,55 @@
+
+
+CREATE TABLE account(
+    acc_no INT,
+    name VARCHAR(15),
+    amount INT
+);
+
+INSERT INTO account VALUES(12001,'Yatish',25000),(12002,'Maitreya',27000),
+(12003,'Omkar',30000),(12004,'Amey',33000),(12005,'Abhishek',40000),
+(12006,'Shubham',12000),(12007,'Deep',10000),(12008,'Gaurav',70000);
+
+SELECT * FROM account;
+
+CREATE TABLE account_log(
+    acc_no INT,
+    name VARCHAR(15),
+    amount INT,
+    trans_type VARCHAR(10),
+    trans_time TIMESTAMP
+);
+
+DESC account_log;
+
+DELIMITER //
+
+CREATE TRIGGER account_trigger AFTER UPDATE ON account
+FOR EACH ROW 
+BEGIN
+DECLARE trans_type VARCHAR(10);
+IF OLD.amount > NEW.amount THEN 
+SET trans_type = 'W';
+ELSE
+SET trans_type = 'D'; 
+END IF;
+
+INSERT INTO account_log VALUES(OLD.acc_no,OLD.name,NEW.amount,trans_type,NOW());
+END
+//
+
+DELIMITER ;
+
+UPDATE account SET amount=35000 WHERE name='Yatish';
+
+SELECT * FROM account_log;
+
+UPDATE account SET amount=10000 WHERE name='Shubham';
+
+SELECT * FROM account_log;
+
+UPDATE account SET amount=50000 WHERE name='Maitreya';
+
+SELECT * FROM account_log;
+
+SELECT * FROM account;

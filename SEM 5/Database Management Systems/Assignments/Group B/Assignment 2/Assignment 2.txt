@@ -1,0 +1,63 @@
+
+CREATE database company;
+
+USE company;
+
+CREATE TABLE emp(
+  emp_id INT PRIMARY KEY,
+  emp_name VARCHAR(15),
+  emp_designation VARCHAR(15),
+  manager_id INT,
+  emp_hired_date DATE,
+  emp_sales INT,
+  emp_commission INT,
+  emp_department_no INT
+);
+
+DESCRIBE emp;
+
+INSERT INTO emp VALUES(7369,"Smith","Clerk",7902,"1980-12-17",800,NULL,20);
+INSERT INTO emp VALUES(7499,"Allen","Salesman",7698,"1981-02-20",1600,300,30);
+INSERT INTO emp VALUES(7521,"Ward","Salesman",7698,"1981-02-22",1250,500,30);
+INSERT INTO emp VALUES(7566,"Jones","Manager",7839,"1981-04-02",2975,NULL,20);
+INSERT INTO emp VALUES(7654,"Martin","Salesman",7698,"1981-09-28",1250,1400,30);
+INSERT INTO emp VALUES(7698,"Blake","Manager",7839,"1981-05-01",2850,NULL,30);
+INSERT INTO emp VALUES(7782,"Clark","Manager",7839,"1981-06-09",2450,NULL,10);
+INSERT INTO emp VALUES(7788,"Scott","Analyst",7566,"1982-12-09",3000,NULL,20);
+INSERT INTO emp VALUES(7839,"King","President",NULL,"1981-11-17",5000,NULL,10);
+INSERT INTO emp VALUES(7844,"Turner","Salesman",7698,"1981-09-08",1500,0,30);
+INSERT INTO emp VALUES(7876,"Adams","Clerk",7788,"1983-01-12",1100,NULL,20);
+INSERT INTO emp VALUES(7900,"James","Clerk",7698,"1981-12-03",950,NULL,30);
+INSERT INTO emp VALUES(7902,"Ford","Analyst",7566,"1981-12-04",3000,NULL,20);
+INSERT INTO emp VALUES(7934,"Miller","Clerk",7782,"1982-01-23",1300,NULL,10);
+
+SELECT * FROM emp;
+
+SELECT emp_name FROM emp WHERE emp_designation IN ("Salesman","Analyst"); 
+
+SELECT * FROM emp WHERE emp_hired_date < "1981-09-30";
+
+SELECT emp_name FROM emp WHERE emp_designation <> "Manager";
+
+SELECT emp_name,emp_id FROM emp WHERE emp_id IN (7369, 7521, 7839, 7934,7788);
+
+SELECT emp_name FROM emp WHERE emp_department_no <> 30 AND emp_department_no <> 40 AND emp_department_no <> 10;
+
+SELECT emp_name FROM emp WHERE emp_hired_date > "1981-06-30" AND emp_hired_date < "1981-12-31" ;
+
+SELECT DISTINCT emp_designation FROM emp ;
+
+SELECT emp_name FROM emp WHERE emp_commission IS NULL;
+
+SELECT emp_name,emp_designation FROM emp WHERE manager_id IS NULL;
+
+SELECT emp_name FROM emp WHERE emp_department_no IS NULL;
+
+SELECT emp_name FROM emp WHERE emp_commission IS NOT NULL;
+
+SELECT emp_name FROM emp WHERE emp_name LIKE "S%"
+UNION 
+SELECT emp_name FROM emp WHERE emp_name LIKE "%s"
+;
+
+SELECT emp_name FROM emp WHERE emp_name LIKE "_i%";

@@ -1,0 +1,32 @@
+SELECT * FROM emp;
+SELECT COUNT(*),AVG(emp_sales) FROM emp WHERE emp_department_no = 20;
+
+SELECT emp_name,emp_sales,emp_sales*0.1 AS PF FROM emp;
+
+SELECT MAX(emp_sales),MIN(emp_sales),AVG(emp_sales) FROM emp;
+
+SELECT * FROM emp ORDER BY emp_sales;
+
+SELECT emp_name,emp_hired_date FROM emp ORDER BY emp_hired_date DESC;
+
+SELECT emp_name,emp_sales,emp_sales*0.1 AS PF,emp_sales*0.5 AS HRA,emp_sales*0.3 AS DA,
+emp_sales+(emp_sales*0.1)+(emp_sales*0.5)+(emp_sales*0.3) AS gross FROM 
+emp ORDER BY gross;
+
+SELECT emp_department_no,COUNT(*) FROM emp GROUP BY emp_department_no;
+
+SELECT emp_department_no,SUM(emp_sales) FROM emp GROUP BY emp_department_no;
+
+SELECT emp_designation,COUNT(*) FROM emp GROUP BY emp_designation ORDER BY COUNT(*) DESC;
+
+SELECT SUM(emp_sales),MAX(emp_sales),MIN(emp_sales),AVG(emp_sales),emp_designation FROM emp GROUP BY emp_designation;
+
+SELECT SUM(emp_sales),MAX(emp_sales),MIN(emp_sales),AVG(emp_sales) FROM emp WHERE emp_department_no = 20;
+
+SELECT MAX(emp_sales) FROM emp WHERE emp_designation = "salesman";
+
+SELECT COUNT(*) FROM emp;
+
+SELECT COUNT(DISTINCT emp_designation) FROM emp;
+
+SELECT SUM(emp_sales) FROM emp;

@@ -1,0 +1,47 @@
+
+CREATE TABLE Student_info(
+    Exam_no varchar(15),
+    Name varchar(15),
+    Sub1 int,
+    Sub2 int,
+    Sub3 int,
+    Percentage DECIMAL(4,2)
+);
+
+
+INSERT INTO Student_info VALUES("T1500801","AJAY",56,40,71,55.67),("T1500802","SACHIN",48,70,56,58.00),
+("T1500803","ATUL",63,71,48,60.67),("T1500814","ANIL",67,56,63,62.00),("T1500815","RAHUL",64,40,67,57.00),
+("T1500809","RAJ",56,70,40,55.33),("T1500855","AKASH",48,71,70,63.00),("T1500879","PARAG",70,56,71,65.67),
+("T1500899","SATISH",71,48,56,58.33),("T1500829","RAHUL",81,65,75,73.67);
+
+
+SELECT * FROM Student_info;
+
+CREATE VIEW Student_view AS SELECT * FROM Student_info;
+
+SELECT * FROM Student_view;
+
+UPDATE Student_info SET name='YATISH' WHERE name='RAHUL';
+
+SELECT * FROM Student_view;
+
+DELETE FROM Student_view WHERE Exam_no='T1500815';
+
+SELECT * FROM Student_view;
+
+SELECT * FROM Student_info;
+
+DELETE FROM Student_info WHERE name='YATISH';
+
+SELECT * FROM Student_view;
+
+UPDATE Student_view SET name='MAITREYA' WHERE name='PARAG';
+
+SELECT * FROM Student_view;
+
+SELECT * FROM Student_info;
+
+
+
+
+

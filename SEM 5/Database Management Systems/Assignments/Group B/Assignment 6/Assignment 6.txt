@@ -1,0 +1,75 @@
+
+Problem Statement
+1) Write a PL/SQL block or Stored Procedure to calculate the Percentage of minimum 10 students.
+
+
+CREATE DATABASE student;
+
+USE student;
+
+CREATE TABLE mark_list(
+    seat_no VARCHAR(10),
+    first_name VARCHAR(10),
+    subject_1 INT,
+    subject_2 INT,
+    subject_3 INT 
+);
+
+DESCRIBE mark_list;
+
+INSERT INTO mark_list VALUES("T1500801","AJAY",56,40,71);
+INSERT INTO mark_list VALUES("T1500802","SACHIN",48,70,56);
+INSERT INTO mark_list VALUES("T1500803","ATUL",63,71,48);
+INSERT INTO mark_list VALUES("T1500814","ANIL",67,56,63);
+INSERT INTO mark_list VALUES("T1500815","RAHUL",64,40,67);
+INSERT INTO mark_list VALUES("T1500809","RAJ",56,70,40);
+INSERT INTO mark_list VALUES("T1500855","AKASH",48,71,70);
+INSERT INTO mark_list VALUES("T1500879","PARAG",70,56,71);
+INSERT INTO mark_list VALUES("T1500899","SATISH",71,48,56);
+INSERT INTO mark_list VALUES("T1500829","RAHUL",81,65,75);
+
+SELECT * FROM mark_list;
+
+ALTER TABLE mark_list ADD COLUMN total INT;
+
+ALTER TABLE mark_list ADD COLUMN percentage DECIMAL(4,2);
+
+DESC mark_list;
+
+delimiter //
+CREATE PROCEDURE total_and_percentage()
+BEGIN
+SELECT * FROM mark_list;
+UPDATE mark_list SET total=subject_1+subject_2+subject_3;
+UPDATE mark_list SET percentage=total/3;
+end //
+delimiter ;
+
+CALL total_and_percentage();
+
+
+2) Write a PL/SQL function which accepts basic salary of an employee and returns a Gross salary of
+an employee.
+employee(eid,ename,job,basic)
+Gross salary = Basic + HRA + DA + TA
+Where HRA = 50% OF BASIC
+DA = 100% OF BASIC
+TA = 20% OF (BASIC + HRA)
+
+
+DELIMITER //
+
+CREATE FUNCTION gross_salary(basic int) RETURNS int
+    -> BEGIN
+    -> declare hra int;
+    -> declare da int;
+    -> declare ta int;
+    -> SET hra=0.5*basic;
+    -> SET da=basic;
+    -> SET ta=0.2*(basic+hra);
+    -> RETURN basic+hra+da+ta;
+    -> END //
+
+DELIMITER ;
+
+SELECT emp_id,emp_name,emp_designation,emp_sales,gross_salary(emp_sales) as gross FROM emp;

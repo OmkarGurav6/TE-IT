@@ -1,0 +1,23 @@
+
+create database studentlocation;
+
+use studentlocation
+
+create table student(rollno int(10), name varchar(10));
+
+insert into student values(1,'Akshay'), (2,'Abhishek'), (3,'Bipin'), (4,'Vijay'), (5,'Nikhil');
+
+create table location(rollno int(10), loc varchar(10));
+
+insert into location values(1,'Mumbai'), (2,'Pune'), (3,'Nagpur'), (4,'Nashik'), (7,'Satara'), (8,'Kolhapur');
+
+select * from student cross join location;
+
+select * from student natural join location;
+
+select * from student left outer join location on student.rollno=location.rollno;
+
+select * from student right outer join location on student.rollno=location.rollno;
+
+select student.rollno, student.name, location.loc from student inner join location on student.rollno=location.rollno;
+

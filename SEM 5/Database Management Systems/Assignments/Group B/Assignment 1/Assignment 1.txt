@@ -1,0 +1,37 @@
+
+create database bank;
+
+use bank;
+
+create table customer(id int, name varchar(40), address varchar(40));
+
+alter table customer drop column address;
+
+alter table customer rename to customer_new;
+
+insert into customer_new values(1, "Yatish");
+
+insert into customer_new values(2, "Maitreya");
+
+insert into customer_new values(3, "Omkar");
+
+insert into customer_new values(4, "Amey");
+
+insert into customer_new values(5, "Shrirang");
+
+select * from customer_new;
+ 
+truncate table customer_new;
+
+select * from customer_new;
+
+drop table customer_new;
+
+show tables;
+
+CREATE USER 'omkar'@'localhost' IDENTIFIED BY 'pass';
+
+grant all on bank to 'omkar'@'localhost';
+
+revoke all on bank from 'omkar'@'localhost';
+

@@ -1,0 +1,74 @@
+show tables;
+select * from mark_list;
+
+CREATE TABLE Stud_First(
+    Exam_no VARCHAR(10),
+    Name VARCHAR(10),
+    Sub_1 INT,
+    Sub_2 INT,
+    Sub_3 INT,
+    Total INT,
+    Percentage DECIMAL(4,2) 
+);
+
+DESC Stud_First;
+
+CREATE TABLE Stud_Pass(
+    Exam_no VARCHAR(10),
+    Name VARCHAR(10),
+    Sub_1 INT,
+    Sub_2 INT,
+    Sub_3 INT,
+    Total INT,
+    Percentage DECIMAL(4,2) 
+);
+
+DESC Stud_Pass;
+
+CREATE TABLE Stud_fail(
+    Exam_no VARCHAR(10),
+    Name VARCHAR(10),
+    Sub_1 INT,
+    Sub_2 INT,
+    Sub_3 INT,
+    Total INT,
+    Percentage DECIMAL(4,2) 
+);
+
+DESC Stud_fail;
+
+DELIMITER //
+CREATE PROCEDURE calculate_percentage()
+BEGIN
+
+DECLARE Sub_1,Sub_2,Sub_3,Total,i,counter INT;
+DECLARE Name,Exam_no VARCHAR(10);
+DECLARE Percentage DECIMAL(4,2);
+
+DECLARE student_cursor CURSOR FOR SELECT seat_no,first_name,subject_1,subject_2,subject_3 FROM mark_list;
+
+SET i=0;
+SELECT COUNT(*) INTO counter FROM mark_list;
+
+OPEN student_cursor;
+REPEAT
+FETCH student_cursor INTO Exam_no,Name,Sub_1,Sub_2,Sub_3;
+SET Total=(Sub_1+Sub_2+Sub_3);
+SET Percentage=(Total/3);
+
+IF Percentage>=60 THEN 
+INSERT INTO Stud_First VALUES(Exam_no,Name,Sub_1,Sub_2,Sub_3,Total,Percentage);
+ELSEIF ((Percentage<60) AND (Percentage>=40)) THEN 
+INSERT INTO Stud_Pass VALUES(Exam_no,Name,Sub_1,Sub_2,Sub_3,Total,Percentage);
+ELSE
+INSERT INTO Stud_fail VALUES(Exam_no,Name,Sub_1,Sub_2,Sub_3,Total,Percentage);
+END IF;
+
+SET i=i+1;
+UNTIL i>=counter END REPEAT;
+CLOSE student_cursor;
+END//
+
+DELIMITER ;
+
+CALL calculate_percentage();

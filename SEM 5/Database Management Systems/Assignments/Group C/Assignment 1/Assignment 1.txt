@@ -1,0 +1,78 @@
+
+use company
+
+db.employee.insertOne({eid:1, ename:"Amit", designation:"Salesman", hiredate:new Date("2017-12-17"),
+ salary:"20000", city:"Mumbai"})
+
+db.employee.insertOne({eid:2, ename:"Sumit", designation:"Salesman", hiredate:new Date("2019-02-01"),
+ salary:"20000", city:"New Delhi"})
+
+db.employee.insertOne({eid:3, ename:"Ram", designation:"Engineer", hiredate:new Date("2018-05-11"),
+ salary:"40000", city:"Pune"})
+
+db.employee.insertOne({eid:4, ename:"David", designation:"Engineer", hiredate:new Date("2019-07-26"),
+ salary:"40000", city:"Mumbai"})
+
+db.employee.insertOne({eid:5, ename:"Rohan", designation:"Manager", hiredate:new Date("2016-12-04"),
+ salary:"60000", city:"Pune"})
+
+db.employee.find().pretty()
+
+db.employee.insertMany([{eid:6, ename:"Manoj", designation:"Manager", hiredate:new Date("2017-02-04"), 
+salary:"60000", city:"Delhi"}, {eid:7, ename:"Ajit", designation:"CFO", hiredate:new Date("2015-05-25"), 
+salary:"80000", city:"Mumbai"}, {eid:8, ename:"Mukesh", designation:"CEO", hiredate:new Date("2015-01-16"), 
+salary:"100000", city:"Delhi"}])
+
+db.employee.find().pretty()
+
+db.employee.updateMany({city:"Pune"},{$set:{salary:"70000"}})
+
+db.employee.find().pretty()
+
+db.employee.update({eid:1},{$push:{skills:["C"]}})
+
+db.employee.update({eid:2},{$push:{skills:["C","C++"]}})
+
+db.employee.update({eid:3},{$push:{skills:["C","C++","Java"]}})
+
+db.employee.update({eid:4},{$push:{skills:["C++","Java"]}})
+
+db.employee.update({eid:5},{$push:{skills:["C","Java","Python"]}})
+
+db.employee.update({eid:6},{$push:{skills:["C","Java","Python","R"]}})
+
+db.employee.update({eid:7},{$push:{skills:["C","C++","Java","Python","R"]}})
+
+db.employee.update({eid:8},{$push:{skills:["C","C++","Python","R","Kotlin"]}})
+
+db.employee.find().pretty()
+
+db.employee.deleteMany({hiredate:new Date("2019-02-01")})
+
+db.employee.find().pretty()
+
+db.employee.update({designation:"Salesman"},{$unset:{skills:""}})
+
+db.employee.find().pretty()
+
+db.employee.update({eid:1},{$set:{skills:["Java","Python"]}})
+
+db.employee.find().pretty()
+
+db.employee.update({designation:"Salesman"},{$unset:{city:""}})
+
+show dbs
+
+show collections
+
+db.employee.update({eid:5},{$unset:{skills:""}})
+
+db.employee.find().pretty()
+
+db.employee.updateMany({},{$set:{city:"Bangalore"}})
+
+db.employee.find().pretty()
+
+db.employee.drop()
+
+

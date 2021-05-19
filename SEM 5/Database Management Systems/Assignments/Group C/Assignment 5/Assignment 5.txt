@@ -1,0 +1,34 @@
+
+use cust
+
+db.customer.insertOne({custID:"A123", amount:500, status:"A"})
+
+db.customer.insertMany([{custID:"A123", amount:250, status:"A"}, {custID:"B212", amount:200, status:"A"}, {custID:"A123", amount:300, status:"D"}])
+
+db.customer.find()
+
+db.customer.aggregate([{$group:{_id:"$custID", Total_amount:{$sum:"$amount"}}}])
+
+db.customer.aggregate({$match:{status:"A"}}, {$group:{_id:"_id", Total_amount:{$sum:"$amount"}}})
+
+db.customer.aggregate({$match:{status:"A"}}, {$group:{_id:"$custID", Min_amount:{$min:"$amount"}}})
+
+db.customer.aggregate({$match:{status:"A"}}, {$group:{_id:"$custID", Max_amount:{$max:"$amount"}}})
+
+db.customer.aggregate({$match:{status:"A"}}, {$group:{_id:"$custID", Avg_amount:{$avg:"$amount"}}})
+
+
+
+db.customer.createIndex({custID:1})
+
+db.customer.getIndexes()
+
+db.customer.dropIndexes()
+
+
+
+
+
+
+
+

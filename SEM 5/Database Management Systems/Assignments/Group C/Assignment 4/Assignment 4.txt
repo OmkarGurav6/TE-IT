@@ -1,0 +1,42 @@
+
+use booksdatabase
+
+db.createCollection("books");
+
+db.books.insert({ "_id" : ObjectId("5426522c517b30434f6a2bd7"), "name" : "Understanding JAVA", "pages" : 100})
+
+db.books.insert({ "_id" : ObjectId("54265231517b30434f6a2bd8"), "name" : "Understanding JSON", "pages" : 200})
+
+db.books.insert({ "_id" : ObjectId("54265249517b30434f6a2bd9"), "name" : "Understanding XML", "pages" : 300 })
+
+db.books.insert({ "_id" : ObjectId("5426525e517b30434f6a2bda"), "name" : "Understanding Web Services", "pages" : 400 })
+
+db.books.insert({ "_id" : ObjectId("54265272517b30434f6a2bdb"), "name" : "Understanding Axis2", "pages" : 150 })
+
+db.books.find();
+
+var map=function(){emit(this.pages>=250 ? "Greater than or equal to 250 pages":"Less than 250 pages",1);}
+
+var reduce=function(key, values){return Array.sum(values);}
+
+db.books.mapReduce(map, reduce, {out:"mapreduce"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
