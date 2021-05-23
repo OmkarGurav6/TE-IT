@@ -2,12 +2,9 @@
   zipf <- "C:/Users/DELL/Downloads/Facebook_metrics.zip"
  
   OutDir <- "C:/Users/DELL/Downloads/Facebook_metrics"
-
-   if(! dir.exists(OutDir)){
-     dir.create(OutDir)
-   }
-   
-    unzip(zipf,exdir = OutDir)
+  
+  
+    unzip(zipf, exdir = OutDir)
     
     Facebook_Data <- read.csv("C:/Users/DELL/Downloads/Facebook_metrics/dataset_Facebook.csv", sep = ";")
     
