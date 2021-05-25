@@ -8,10 +8,6 @@
 
   
   # Data cleaning
-  sum(is.na(my_airquality_data))
-  
-   # Finding out total no of NA in each column
-   sapply(my_airquality_data, function(x)sum(is.na(x)))
  
    # Solution 1 to remove NA values : Omit rows containing NA value  
    copy <- airquality
@@ -41,35 +37,27 @@
   # Data transformation
 
    copy$Month <- month.abb[copy$Month]
+   str(copy)
 
   
   # Data model building (regression model for prediction of Ozone value)   
    
-   # Normalizing the dataset so that no particular attribute has more impact on clustering algorithm than others.
-   normalize <- function(x){
-      
-      return((x-min(x))/(max(x)-min(x)))
-   
-   }
-   
-   # replace contents of dataset with normalized values
-   my_airquality_data_normalized <- normalize(my_airquality_data) 
-   str(my_airquality_data_normalized)    
-   
    # Setting predictor attribute
-   solar_R <- my_airquality_data_normalized[, "Solar.R"]
+   solar_R <- my_airquality_data[, "Solar.R"]
    
    # Setting target attribute
-   ozone <- my_airquality_data_normalized[, "Ozone"]
+   ozone <- my_airquality_data[, "Ozone"]
+   
+   plot(ozone~solar_R)
    
    # Fitting linear model
    model_ozone_solar_R <- lm(ozone~solar_R)
    model_ozone_solar_R        # Gives values of y-intercept and slope         
    
-   plot(ozone~solar_R)
+   abline(model_ozone_solar_R, col="blue")
    
-   # Prediction of 'Ozone' when 'Solar.R'= 20
-   p1 <- predict(model_ozone_solar_R, data.frame("solar_R" = 20))
+   # Prediction of 'Ozone' when 'Solar.R'= 10
+   p1 <- predict(model_ozone_solar_R, data.frame("solar_R" = 10))
    p1   
       
    
